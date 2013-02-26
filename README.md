@@ -1,4 +1,0 @@
-scala-euler
-===========
-
-scala exercises
