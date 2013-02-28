@@ -8,16 +8,16 @@ object EulerApp {
 
   /** The main entry point for an Euler solution. Just calls `answer`. */
   def main(args: Array[String]) {
-    if ((args.length < 2)||(args.length >= 2 && !args(1).forall(_.isDigit))) {
+    if ((args.length < 2) || (args.length >= 2 && !args(1).forall(_.isDigit))) {
       println("Usage: run [generate|solve d]")
-    }else{
-    
-    args(0) match {
-      case "generate" => generate(args(1))
-      case "solve" => solve(args(1))
-      case _ =>
-        println("Usage: run [generate|solve d]")
-    }
+    } else {
+
+      args(0) match {
+        case "generate" => generate(args(1))
+        case "solve" => solve(args(1))
+        case _ =>
+          println("Usage: run [generate|solve d]")
+      }
     }
   }
 
@@ -41,9 +41,11 @@ object EulerApp {
   def solve(num: String) = {
     val questionNumber = getQuestionNumber(num)
     val n: Int = Integer.valueOf(num).intValue();
-    val eulerQuestion = "Euler" + questionNumber + "$"
+    val eulerQuestion = "Euler" + questionNumber
     val answer = getAnswer(eulerQuestion)
-    println(answer)
+    println()
+    println("The answer for " + eulerQuestion + " is " + answer)
+    println()
   }
 
   private def getQuestionNumber(num: String): String = {
@@ -52,17 +54,17 @@ object EulerApp {
     val questionNumber = "%03d".format(n)
     questionNumber
   }
-  
-  private def getAnswer(eulerQuestion: java.lang.String): Any = {
-    try{
-    val cons = Class.forName(eulerQuestion).getDeclaredConstructors();
 
-    cons(0).setAccessible(true);
-    val someObjectTrait: EulerTrait = cons(0).newInstance().asInstanceOf[EulerTrait]
-    val answer = someObjectTrait.answer
-    answer
-    }catch{
-      case _ =>println("Question "+eulerQuestion +" is not available")
+  private def getAnswer(eulerQuestion: java.lang.String): Any = {
+    try {
+      val cons = Class.forName(eulerQuestion + "$").getDeclaredConstructors();
+
+      cons(0).setAccessible(true);
+      val someObjectTrait: EulerTrait = cons(0).newInstance().asInstanceOf[EulerTrait]
+      val answer = someObjectTrait.answer
+      answer
+    } catch {
+      case _ => println("Question " + eulerQuestion + " is not available")
     }
   }
 }
