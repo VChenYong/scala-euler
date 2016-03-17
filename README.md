@@ -1,5 +1,7 @@
 Inspired by the solution from https://github.com/samskivert/euler-scala.git
 
+[![Build Status](https://travis-ci.org/VChenYong/scala-euler.svg?branch=master)](https://travis-ci.org/VChenYong/scala-euler)
+
 Run Example
 
 
